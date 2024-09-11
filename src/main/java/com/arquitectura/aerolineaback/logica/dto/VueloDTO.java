@@ -1,4 +1,4 @@
-package com.arquitectura.aerolineaback;
+package com.arquitectura.aerolineaback.logica.dto;
 
 import java.util.Date;
 

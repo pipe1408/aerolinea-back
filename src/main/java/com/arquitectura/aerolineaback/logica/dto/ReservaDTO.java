@@ -1,4 +1,4 @@
-package com.arquitectura.aerolineaback;
+package com.arquitectura.aerolineaback.logica.dto;
 
 public record ReservaDTO(String ticketId,
                          String vueloId,
