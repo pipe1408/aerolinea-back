@@ -1,0 +1,31 @@
+package com.arquitectura.aerolineaback.persistencia.orm;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "VUELOS")
+@Data
+public class VueloORM {
+    @Id
+    @Column(name = "FLIGHT_ID", nullable = false, length = 50)
+    private String flightId;
+
+    @Column(name = "ORIGEN", length = 50)
+    private String origen;
+
+    @Column(name = "DESTINO", length = 50)
+    private String destino;
+
+    @Column(name = "FECHA")
+    private LocalDate fecha;
+
+    @Column(name = "ASIENTOS_LIBRES")
+    private Integer asientosLibres;
+
+}
