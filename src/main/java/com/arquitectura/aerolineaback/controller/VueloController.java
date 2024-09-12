@@ -1,7 +1,6 @@
 package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.bd.jpa.PersonaJPA;
-import com.arquitectura.aerolineaback.logica.dto.PersonaDTO;
+import com.arquitectura.aerolineaback.persistencia.jpa.PersonaJPA;
 import com.arquitectura.aerolineaback.logica.dto.VueloDTO;
 import org.springframework.web.bind.annotation.*;
 
