@@ -1,13 +1,11 @@
 package com.arquitectura.aerolineaback.persistencia.orm;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "RESERVAS")
-@Data
 public class ReservaORM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,11 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
 
 @Entity(name = "PersonaORM")
 @Table(name = "PERSONAS")
-@Data
 public class PersonaORM {
     @Id
     @Column(name = "PASSPORT_ID", nullable = false, length = 50)
@@ -19,4 +17,28 @@ public class PersonaORM {
 
     @Column(name = "LAST_NAME", length = 50)
     private String lastName;
+
+    public String getPassportId() {
+        return passportId;
+    }
+
+    public void setPassportId(String passportId) {
+        this.passportId = passportId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
