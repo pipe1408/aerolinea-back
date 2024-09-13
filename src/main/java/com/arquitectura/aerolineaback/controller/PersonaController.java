@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/personas")
+@CrossOrigin(origins = { "*" })
 public class PersonaController {
     private final PersonaService personaService;
 
@@ -16,26 +17,22 @@ public class PersonaController {
         this.personaService = personaService;
     }
 
-    @CrossOrigin(origins = {"*"})
     @GetMapping(path = "/get")
     public List<PersonaORM> getPersonas() {
         return personaService.getPersonas();
     }
 
-    @CrossOrigin(origins = {"*"})
     @PostMapping(path = "/guardar")
     public RespuestaDTO guardarPersona(@RequestBody PersonaDTO personaDTO) {
         return personaService.savePersona(personaDTO);
     }
 
-    @CrossOrigin(origins = {"*"})
     @DeleteMapping(path = "/borrar")
     public String borrarPersona(@RequestBody PersonaDTO personaDTO) {
 
         return "persona eliminada";
     }
 
-    @CrossOrigin(origins = {"*"})
     @PutMapping(path = "/actualizar")
     public String actualizarPersona(@RequestBody PersonaDTO personaDTO) {
 
