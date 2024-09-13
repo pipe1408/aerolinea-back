@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/personas")
 public class PersonaController {
     private final PersonaService personaService;
 
@@ -16,26 +17,26 @@ public class PersonaController {
     }
 
     @CrossOrigin(origins = {"*"})
-    @GetMapping(path = "/personas")
+    @GetMapping(path = "/get")
     public List<PersonaORM> getPersonas() {
         return personaService.getPersonas();
     }
 
     @CrossOrigin(origins = {"*"})
-    @PostMapping(path = "/guardarpersona")
+    @PostMapping(path = "/guardar")
     public RespuestaDTO guardarPersona(@RequestBody PersonaDTO personaDTO) {
         return personaService.savePersona(personaDTO);
     }
 
     @CrossOrigin(origins = {"*"})
-    @DeleteMapping(path = "/borrarpersona")
+    @DeleteMapping(path = "/borrar")
     public String borrarPersona(@RequestBody PersonaDTO personaDTO) {
 
         return "persona eliminada";
     }
 
     @CrossOrigin(origins = {"*"})
-    @PutMapping(path = "/actualizarpersona")
+    @PutMapping(path = "/actualizar")
     public String actualizarPersona(@RequestBody PersonaDTO personaDTO) {
 
         return "persona actualizada";
