@@ -8,6 +8,7 @@ import jakarta.persistence.Table;
 @Entity(name = "PersonaORM")
 @Table(name = "PERSONAS")
 public class PersonaORM {
+
     @Id
     @Column(name = "PASSPORT_ID", nullable = false, length = 50)
     private String passportId;
@@ -17,6 +18,16 @@ public class PersonaORM {
 
     @Column(name = "LAST_NAME", length = 50)
     private String lastName;
+
+    public PersonaORM(String passportId, String firstName, String lastName) {
+        this.passportId = passportId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public PersonaORM() {
+
+    }
 
     public String getPassportId() {
         return passportId;

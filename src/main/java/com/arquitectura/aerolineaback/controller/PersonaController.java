@@ -6,6 +6,7 @@ import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.persistencia.orm.PersonaORM;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/personas")
@@ -20,6 +21,11 @@ public class PersonaController {
     @GetMapping(path = "/get")
     public List<PersonaORM> getPersonas() {
         return personaService.getPersonas();
+    }
+
+    @GetMapping(path = "/find/{passportId}")
+    public Optional<PersonaORM> getPersona(@PathVariable String passportId) {
+        return personaService.getPersona(passportId);
     }
 
     @PostMapping(path = "/guardar")

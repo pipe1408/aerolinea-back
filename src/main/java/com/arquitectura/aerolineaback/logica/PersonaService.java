@@ -6,6 +6,7 @@ import com.arquitectura.aerolineaback.persistencia.jpa.PersonaJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.PersonaORM;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonaService {
@@ -19,6 +20,10 @@ public class PersonaService {
 
     public List<PersonaORM> getPersonas() {
         return personaJPA.findAll();
+    }
+
+    public Optional<PersonaORM> getPersona(String passportId) {
+        return personaJPA.findById(passportId);
     }
 
     public RespuestaDTO savePersona(PersonaDTO personaDTO) {
