@@ -33,15 +33,14 @@ public class PersonaController {
         return personaService.savePersona(personaDTO);
     }
 
+    @PutMapping(path = "/actualizar")
+    public RespuestaDTO actualizarPersona(@RequestBody PersonaDTO personaDTO) {
+        return personaService.updatePersona(personaDTO);
+    }
+
     @DeleteMapping(path = "/borrar")
     public String borrarPersona(@RequestBody PersonaDTO personaDTO) {
 
         return "persona eliminada";
-    }
-
-    @PutMapping(path = "/actualizar")
-    public String actualizarPersona(@RequestBody PersonaDTO personaDTO) {
-
-        return "persona actualizada";
     }
 }

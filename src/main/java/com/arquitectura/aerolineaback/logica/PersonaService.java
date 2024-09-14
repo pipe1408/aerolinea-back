@@ -27,8 +27,12 @@ public class PersonaService {
     }
 
     public RespuestaDTO savePersona(PersonaDTO personaDTO) {
-        personaORM = new PersonaORM();
 
+        if (getPersona(personaDTO.pasaporteId()).isPresent()) {
+            return new RespuestaDTO(false, "La persona ya existe");
+        }
+
+        personaORM = new PersonaORM();
         personaORM.setPassportId(personaDTO.pasaporteId());
         personaORM.setFirstName(personaDTO.firstName());
         personaORM.setLastName(personaDTO.lastName());
@@ -38,13 +42,11 @@ public class PersonaService {
     }
 
     public RespuestaDTO updatePersona(PersonaDTO personaDTO) {
-        personas = personaJPA.findByPassportId(personaDTO.pasaporteId());
-        if (personas.isEmpty()) {
-            return new RespuestaDTO(false, "El pasaporte ingresado no existe");
+        Optional<PersonaORM> optionalPersona = getPersona(personaDTO.pasaporteId());
+        if (optionalPersona.isEmpty()) {
+            return new RespuestaDTO(false, "Persona no existe");
         }
-        personaORM = personas.getFirst();
-
-        personaORM.setFirstName(personaDTO.pasaporteId());
+        personaORM = optionalPersona.get();
         personaORM.setFirstName(personaDTO.firstName());
         personaORM.setLastName(personaDTO.lastName());
         personaJPA.save(personaORM);
