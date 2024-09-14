@@ -53,4 +53,14 @@ public class PersonaService {
 
         return new RespuestaDTO(true, "Persona actualizada");
     }
+
+    public RespuestaDTO deletePersona(String passportId) {
+        Optional<PersonaORM> persona = getPersona(passportId);
+
+        if (persona.isEmpty()) {
+            return new RespuestaDTO(false, "Persona no existe");
+        }
+        personaJPA.delete(persona.get());
+        return new RespuestaDTO(true, "Persona eliminada");
+    }
 }

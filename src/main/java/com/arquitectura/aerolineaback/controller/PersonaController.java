@@ -38,9 +38,8 @@ public class PersonaController {
         return personaService.updatePersona(personaDTO);
     }
 
-    @DeleteMapping(path = "/borrar")
-    public String borrarPersona(@RequestBody PersonaDTO personaDTO) {
-
-        return "persona eliminada";
+    @DeleteMapping(path = "/borrar/{passportId}")
+    public RespuestaDTO borrarPersona(@PathVariable String passportId) {
+        return personaService.deletePersona(passportId);
     }
 }
