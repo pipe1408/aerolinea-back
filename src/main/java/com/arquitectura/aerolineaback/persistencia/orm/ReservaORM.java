@@ -10,7 +10,7 @@ public class ReservaORM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TICKET_ID", nullable = false)
-    private Integer id;
+    private Integer ticketId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.RESTRICT)
@@ -21,4 +21,28 @@ public class ReservaORM {
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PASSPORT_ID")
     private PersonaORM passport;
+
+    public Integer getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(Integer id) {
+        this.ticketId = id;
+    }
+
+    public VueloORM getFlight() {
+        return flight;
+    }
+
+    public void setFlight(VueloORM flight) {
+        this.flight = flight;
+    }
+
+    public PersonaORM getPassport() {
+        return passport;
+    }
+
+    public void setPassport(PersonaORM passport) {
+        this.passport = passport;
+    }
 }
