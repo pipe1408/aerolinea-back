@@ -12,7 +12,6 @@ import java.util.Optional;
 public class PersonaService {
     private final PersonaJPA personaJPA;
     private PersonaORM personaORM;
-    List<PersonaORM> personas;
 
     public PersonaService(PersonaJPA personaJPA) {
         this.personaJPA = personaJPA;
