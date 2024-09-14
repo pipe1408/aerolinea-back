@@ -26,4 +26,23 @@ public class VueloORM {
     @Column(name = "ASIENTOS_LIBRES")
     private Integer asientosLibres;
 
+    public void setFlightId(String flightId) {
+        this.flightId = flightId;
+    }
+
+    public void setOrigen(String origen) {
+        this.origen = origen;
+    }
+
+    public void setDestino(String destino) {
+        this.destino = destino;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+
+    public void setAsientosLibres(Integer asientosLibres) {
+        this.asientosLibres = asientosLibres;
+    }
 }
