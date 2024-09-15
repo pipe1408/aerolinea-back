@@ -2,7 +2,6 @@ package com.arquitectura.aerolineaback.controller;
 
 import com.arquitectura.aerolineaback.logica.ReservaService;
 import com.arquitectura.aerolineaback.logica.dto.ReservaDTO;
-import com.arquitectura.aerolineaback.persistencia.jpa.ReservaJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.ReservaORM;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,21 +28,21 @@ public class ReservaController {
         return reservaService.getReserva(ticketId);
     }
 
-    @PostMapping(path = "/guardarreserva")
-    public String guardarreserva(@RequestBody ReservaDTO reservaDTO) {
+    @PostMapping(path = "/guardar")
+    public String guardarReserva(@RequestBody ReservaDTO reservaDTO) {
 
         return "reserva creada";
     }
 
-    @DeleteMapping(path = "/borrarreserva")
-    public String borrarreserva(@RequestBody ReservaDTO reservaDTO) {
-
-        return "reserva eliminada";
-    }
-
-    @PutMapping(path = "/actualizarreserva")
-    public String actualizarreserva(@RequestBody ReservaDTO reservaDTO) {
+    @PutMapping(path = "/actualizar")
+    public String actualizarReserva(@RequestBody ReservaDTO reservaDTO) {
 
         return "reserva actualizada";
+    }
+
+    @DeleteMapping(path = "/borrar/{ticketId}")
+    public String borrarReserva(@PathVariable String ticketId) {
+
+        return "reserva eliminada";
     }
 }
