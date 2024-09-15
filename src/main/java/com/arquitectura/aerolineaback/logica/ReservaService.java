@@ -53,11 +53,17 @@ public class ReservaService {
         if (reservaJPA.findByPassportAndFlight(personaORM, vueloORM).isPresent()) {
             return new RespuestaDTO(false, "La persona ya tiene reserva para ese vuelo");
         }
+        if (!DateValidator.fechaReservable(vueloORM)) {
+            return new RespuestaDTO(false, "Las reservas están cerradas para este vuelo");
+        }
+        if (!AsientosManager.checkDisponibilidad(vueloORM)) {
+            return new RespuestaDTO(false, "Este vuelo no cuenta con asientos disponibles.");
+        }
+        AsientosManager.reservarAsiento(vueloORM);
         reservaORM = new ReservaORM();
         reservaORM.setFlight(vueloORM);
         reservaORM.setPassport(personaORM);
         reservaJPA.save(reservaORM);
-
         return new RespuestaDTO(true, "Reserva creada");
     }
 
@@ -85,6 +91,7 @@ public class ReservaService {
         if (optionalReserva.isEmpty()) {
             return new RespuestaDTO(false, "Reserva no existe");
         }
+        optionalReserva.ifPresent(reserva -> AsientosManager.liberarAsiento(reserva.getFlight()));
         reservaJPA.delete(optionalReserva.get());
         return new RespuestaDTO(true, "Reserva eliminada");
     }
