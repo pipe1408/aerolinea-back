@@ -12,8 +12,6 @@ import java.util.Optional;
 @Repository
 public interface ReservaJPA extends JpaRepository<ReservaORM, String> {
     Optional<ReservaORM> findByPassportAndFlight(PersonaORM passport, VueloORM flight);
-    List<ReservaORM> findByPassport(PersonaORM passport);
-    List<ReservaORM> findByFlight(VueloORM flight);
     List<ReservaORM> findAllByPassport(PersonaORM personaORM);
     List<ReservaORM> findAllByFlight(VueloORM flight);
 }

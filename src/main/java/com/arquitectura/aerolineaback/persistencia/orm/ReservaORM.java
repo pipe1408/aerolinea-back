@@ -26,10 +26,6 @@ public class ReservaORM {
         return ticketId;
     }
 
-    public void setTicketId(Integer id) {
-        this.ticketId = id;
-    }
-
     public VueloORM getFlight() {
         return flight;
     }
