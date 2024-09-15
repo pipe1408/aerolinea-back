@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Optional;
+
 @Entity
 @Table(name = "RESERVAS")
 public class ReservaORM {
@@ -12,12 +14,12 @@ public class ReservaORM {
     @Column(name = "TICKET_ID", nullable = false)
     private Integer ticketId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "FLIGHT_ID")
     private VueloORM flight;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.RESTRICT)
     @JoinColumn(name = "PASSPORT_ID")
     private PersonaORM passport;

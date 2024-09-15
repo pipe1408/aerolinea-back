@@ -1,37 +1,46 @@
 package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.persistencia.jpa.PersonaJPA;
+import com.arquitectura.aerolineaback.logica.ReservaService;
 import com.arquitectura.aerolineaback.logica.dto.ReservaDTO;
+import com.arquitectura.aerolineaback.persistencia.jpa.ReservaJPA;
+import com.arquitectura.aerolineaback.persistencia.orm.ReservaORM;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.List;
+import java.util.Optional;
 
+@RestController
+@RequestMapping(path = "/reservas")
 @CrossOrigin(origins = {"*"})
 public class ReservaController {
+    private final ReservaService reservaService;
 
-    private PersonaJPA personaJPA;
-
-    @CrossOrigin(origins = {"*"})
-    @GetMapping(path = "/reservas")
-    public String todaslasreservas() {
-        return "trayendo las reservas...";
+    public ReservaController(ReservaService reservaService) {
+        this.reservaService = reservaService;
     }
 
-    @CrossOrigin(origins = {"*"})
+    @GetMapping(path = "/get")
+    public List<ReservaORM> getReservas() {
+        return reservaService.getReservas();
+    }
+
+    @GetMapping(path = "/find/{ticketId}")
+    public Optional<ReservaORM> getReserva(@PathVariable String ticketId) {
+        return reservaService.getReserva(ticketId);
+    }
+
     @PostMapping(path = "/guardarreserva")
     public String guardarreserva(@RequestBody ReservaDTO reservaDTO) {
 
         return "reserva creada";
     }
 
-    @CrossOrigin(origins = {"*"})
     @DeleteMapping(path = "/borrarreserva")
     public String borrarreserva(@RequestBody ReservaDTO reservaDTO) {
 
         return "reserva eliminada";
     }
 
-    @CrossOrigin(origins = {"*"})
     @PutMapping(path = "/actualizarreserva")
     public String actualizarreserva(@RequestBody ReservaDTO reservaDTO) {
 
