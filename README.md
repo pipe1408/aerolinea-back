@@ -4,7 +4,7 @@ Este sistema permite realizar la operación básica de una aerolínea, con accio
 vuelos, el registro de pasajeros o la asignación de reservas de vuelos a pasajeros.
 
 ## **Importante ⚠️**
-Dada la naturaleza del despliegue de la aplicación, para poder garantizar el correcto funcionamiento de la aplicación,
+Dada la naturaleza del despliegue de la aplicación, para poder garantizar su correcto funcionamiento,
 es necesario desactivar un ajuste de seguridad del navegador, de lo contrario no será posible que la API sea consumida.
 
 ![allow1.png](docs%2Fallow1.png)
