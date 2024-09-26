@@ -19,6 +19,12 @@ pipeline {
             }
         }
 
+        stage('Set permissions') {
+            steps {
+                sh 'chmod +x gradlew'
+            }
+        }
+
         stage('Build') {
             steps {
                 script {
