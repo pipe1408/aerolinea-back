@@ -30,7 +30,10 @@ class ReservaServiceTest {
     private PersonaService personaService;
 
     @Mock
-    private AsientosManager asientosManager; // Mock de AsientosManager
+    private AsientosManager asientosManager;
+
+    @Mock
+    private DateValidator dateValidator;
 
     @InjectMocks
     private ReservaService reservaService;
@@ -50,7 +53,7 @@ class ReservaServiceTest {
         when(personaService.getPersona("A123456")).thenReturn(Optional.of(personaORM));
         when(reservaJPA.findByPassportAndFlight(personaORM, vueloORM)).thenReturn(Optional.empty());
         when(asientosManager.checkDisponibilidad(vueloORM)).thenReturn(true);
-        when(DateValidator.fechaReservable(vueloORM)).thenReturn(true);
+        when(dateValidator.fechaReservable(vueloORM)).thenReturn(true);
 
         RespuestaDTO respuesta = reservaService.saveReserva(reservaDTO);
 
