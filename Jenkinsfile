@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+            jdk 'Java 22'
+        }
+
     environment {
         REPO_URL = 'https://github.com/pipe1408/aerolinea-back.git'
         BRANCH_NAME = 'dev'
@@ -28,12 +32,10 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    try {
-                        sh './gradlew clean build'
-                    } catch (Exception e) {
-                        error "Build failed: ${e.message}"
-                    }
+                    env.JAVA_HOME = tool name: 'Java 22'
+                    sh "${env.JAVA_HOME}/bin/java -version"
                 }
+                sh './gradlew clean build'
             }
         }
     }
