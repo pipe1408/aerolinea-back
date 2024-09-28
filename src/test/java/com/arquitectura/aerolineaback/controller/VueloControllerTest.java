@@ -1,6 +1,5 @@
-package com.arquitectura.aerolineaback.Pruebas;
+package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.controller.VueloController;
 import com.arquitectura.aerolineaback.logica.VueloService;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.logica.dto.VueloDTO;
@@ -10,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.util.Arrays;

@@ -1,6 +1,5 @@
-package com.arquitectura.aerolineaback.Pruebas;
+package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.controller.ReservaController;
 import com.arquitectura.aerolineaback.logica.ReservaService;
 import com.arquitectura.aerolineaback.logica.dto.ReservaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;

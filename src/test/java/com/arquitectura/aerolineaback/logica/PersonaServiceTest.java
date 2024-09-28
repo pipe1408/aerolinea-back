@@ -1,6 +1,5 @@
-package com.arquitectura.aerolineaback.Pruebas;
+package com.arquitectura.aerolineaback.logica;
 
-import com.arquitectura.aerolineaback.logica.PersonaService;
 import com.arquitectura.aerolineaback.logica.dto.PersonaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.persistencia.jpa.PersonaJPA;

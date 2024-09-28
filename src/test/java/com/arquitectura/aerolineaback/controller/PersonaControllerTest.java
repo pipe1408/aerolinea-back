@@ -1,6 +1,5 @@
-package com.arquitectura.aerolineaback.Pruebas;
+package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.controller.PersonaController;
 import com.arquitectura.aerolineaback.logica.PersonaService;
 import com.arquitectura.aerolineaback.logica.dto.PersonaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
@@ -18,7 +17,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class PersonasController{
+class PersonaControllerTest{
 
     @Mock
     private PersonaService personaService;
