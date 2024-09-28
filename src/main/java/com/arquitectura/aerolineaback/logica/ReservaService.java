@@ -1,15 +1,16 @@
 package com.arquitectura.aerolineaback.logica;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
 import com.arquitectura.aerolineaback.logica.dto.ReservaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.persistencia.jpa.ReservaJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.PersonaORM;
 import com.arquitectura.aerolineaback.persistencia.orm.ReservaORM;
 import com.arquitectura.aerolineaback.persistencia.orm.VueloORM;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReservaService {
@@ -57,7 +58,7 @@ public class ReservaService {
         if (reservaJPA.findByPassportAndFlight(personaORM, vueloORM).isPresent()) {
             return new RespuestaDTO(false, "La persona ya tiene reserva para ese vuelo");
         }
-        if (!dateValidator.fechaReservable(vueloORM)) { // Use the instance method
+        if (!dateValidator.fechaReservable(vueloORM)) { 
             return new RespuestaDTO(false, "Las reservas están cerradas para este vuelo");
         }
         if (!asientosManager.checkDisponibilidad(vueloORM)) {
