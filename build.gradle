@@ -10,7 +10,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(19)
+        languageVersion = JavaLanguageVersion.of(22)
     }
 }
 
@@ -31,7 +31,7 @@ tasks.named('test') {
     finalizedBy jacocoTestReport
 }
 jacoco {
-    toolVersion = "0.8.8" 
+    toolVersion = "0.8.12"
 }
 
 tasks.jacocoTestReport {
