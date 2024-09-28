@@ -30,16 +30,35 @@ tasks.named('test') {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
+
 jacoco {
     toolVersion = "0.8.12"
 }
 
 tasks.jacocoTestReport {
-    dependsOn test 
+    dependsOn test
 
     reports {
         xml.required = true
         csv.required = false
-        html.required = true 
+        html.required = true
     }
 }
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.70
+            }
+        }
+        rule {
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.60
+            }
+        }
+    }
+}
+
+tasks.check.dependsOn jacocoTestCoverageVerification
