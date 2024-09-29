@@ -80,6 +80,14 @@ pipeline {
             }
         }
 
+        stage ('Trivy verification') {
+            steps {
+                script {
+                    docker run aquasec/trivy image ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}
+                }
+            }
+        }
+
         stage('Login to DockerHub') {
             when {
                 branch 'dev'
