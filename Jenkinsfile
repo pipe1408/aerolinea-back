@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     tools {
-            jdk 'Java 22'
-        }
+        jdk 'Java 22'
+    }
 
     environment {
         REPO_URL = 'https://github.com/pipe1408/aerolinea-back.git'
@@ -41,7 +41,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv() {
+                withSonarQubeEnv('sonar') {
                     sh "./gradlew sonar"
                 }
             }
