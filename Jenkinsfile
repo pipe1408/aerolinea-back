@@ -69,7 +69,7 @@ pipeline {
         stage('Login to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('https://index.docker.io/v1/', ${DOCKER_CREDENTIALS_ID}) {
                         echo 'Logged in to DockerHub'
                     }
                 }
