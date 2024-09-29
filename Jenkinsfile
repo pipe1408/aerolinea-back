@@ -66,6 +66,46 @@ pipeline {
             }
         }
 
+        stage('Scan with Trivy') {
+            steps {
+                script {
+                    // Run Trivy to scan the built image and save the report
+                    sh '''
+                    docker run --rm \
+                      -v /var/run/docker.sock:/var/run/docker.sock \
+                      -v $(pwd):/results \
+                      aquasec/trivy image --quiet --exit-code 1 --format json --output /results/trivy-report.json ${DOCKERHUB_REPO}:${env.BUILD_NUMBER}
+                    '''
+                }
+            }
+        }
+
+        stage('Check Vulnerabilities') {
+            steps {
+                script {
+                    // Load the Trivy report
+                    def report = readJSON file: 'trivy-report.json'
+                    def criticalVulns = report.Vulnerabilities.findAll { it.Severity == 'CRITICAL' }
+                    def highVulns = report.Vulnerabilities.findAll { it.Severity == 'HIGH' }
+
+                    // Check if there are any critical or high vulnerabilities
+                    if (criticalVulns.size() > 0 || highVulns.size() > 0) {
+                        error "Pipeline failed due to critical or high vulnerabilities: " +
+                              "${criticalVulns.size()} critical and ${highVulns.size()} high vulnerabilities found."
+                    } else {
+                        echo "No critical or high vulnerabilities found."
+                    }
+                }
+            }
+        }
+
+        stage('Publish Results') {
+            steps {
+                // Optionally publish the scan results (e.g., using the archiveArtifacts plugin)
+                archiveArtifacts artifacts: 'trivy-report.json', fingerprint: true
+            }
+        }
+
         stage('Login to DockerHub') {
             steps {
                 script {
