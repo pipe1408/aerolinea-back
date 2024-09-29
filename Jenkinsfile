@@ -76,6 +76,7 @@ pipeline {
             steps {
                 script {
                     def image = docker.build("${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER}")
+                    sh "docker images"
                 }
             }
         }
