@@ -17,14 +17,14 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                withCredentials([string(credentialsId: GITHUB_CREDENTIALS_ID, variable: 'GITHUB_TOKEN')]) {
+                withCredentials([string(credentialsId: env.GITHUB_CREDENTIALS_ID, variable: 'GITHUB_TOKEN')]) {
                     script {
-                        githubNotify credentialsId: GITHUB_CREDENTIALS_ID, context: 'Clonar repositorio', status: 'PENDING'
+                        githubNotify credentialsId: env.GITHUB_CREDENTIALS_ID, context: 'Clonar repositorio', status: 'PENDING'
                         try {
                             git branch: BRANCH_NAME, url: REPO_URL
-                            githubNotify credentialsId: GITHUB_CREDENTIALS_ID, context: 'Clonar repositorio', status: 'SUCCESS'
+                            githubNotify credentialsId: env.GITHUB_CREDENTIALS_ID, context: 'Clonar repositorio', status: 'SUCCESS'
                         } catch (Exception e) {
-                            githubNotify credentialsId: GITHUB_CREDENTIALS_ID, context: 'Clonar repositorio', status: 'FAILURE'
+                            githubNotify credentialsId: env.GITHUB_CREDENTIALS_ID, context: 'Clonar repositorio', status: 'FAILURE'
                             error "Failed to clone repository: ${e.message}"
                         }
                     }
