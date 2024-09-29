@@ -10,6 +10,7 @@ void setBuildStatus(String message, String state) {
 
 pipeline {
     agent any
+    setBuildStatus("Build started", "PENDING");
 
     tools {
         jdk 'Java 22'
