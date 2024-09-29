@@ -29,7 +29,7 @@ pipeline {
 
                 script {
                     try {
-                        git branch: BRANCH_NAME, url: REPO_URL
+                        checkout scm
                     } catch (Exception e) {
                         error "Failed to clone repository: ${e.message}"
                     }
