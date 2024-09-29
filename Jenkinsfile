@@ -80,7 +80,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    docker run -u root -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --scanners vuln --severity CRITICAL --exit-code 1 ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}
+                    docker run -u root -v $HOME/Library/Caches:/root/.cache/ -v /var/run/docker.sock:/var/run/docker.sock --name trivy_scan aquasec/trivy image --scanners vuln --severity CRITICAL --exit-code 1 ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}
                     """
                 }
             }
@@ -118,6 +118,7 @@ pipeline {
         always {
             script {
                 sh "docker rmi ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER} || true"
+                sh 'docker rm -f trivy_scan || true'
             }
         }
         success {
