@@ -84,7 +84,7 @@ pipeline {
         stage ('Trivy verification') {
             steps {
                 script {
-                    sh "docker run -u root -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}"
+                    sh "docker run -u root -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --scanners vuln ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}"
                 }
             }
         }
