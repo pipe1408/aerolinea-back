@@ -1,3 +1,13 @@
+void setBuildStatus(String message, String state) {
+  step([
+      $class: "GitHubCommitStatusSetter",
+      reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/pipe1408/aerolinea-back"],
+      contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
+      errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+      statusResultSource: [ $class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]] ]
+  ]);
+}
+
 pipeline {
     agent any
 
@@ -16,6 +26,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
+                setBuildStatus("Build failed", "PENDING");
                 script {
                     try {
                         git branch: BRANCH_NAME, url: REPO_URL
@@ -93,6 +104,12 @@ pipeline {
             script {
                 sh "docker rmi ${DOCKERHUB_REPO}:${env.BUILD_NUMBER} || true"
             }
+        }
+        success {
+            setBuildStatus("Build succeeded", "SUCCESS");
+        }
+        failure {
+            setBuildStatus("Build failed", "FAILURE");
         }
     }
 }
