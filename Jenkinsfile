@@ -10,7 +10,6 @@ void setBuildStatus(String message, String state) {
 
 pipeline {
     agent any
-    setBuildStatus("Build started", "PENDING");
 
     tools {
         jdk 'Java 22'
@@ -27,6 +26,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
+                setBuildStatus("Build failed", "FAILURE");
                 script {
                     try {
                         git branch: BRANCH_NAME, url: REPO_URL
