@@ -69,7 +69,7 @@ pipeline {
         stage('Login to DockerHub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', ${DOCKER_CREDENTIALS_ID}) {
+                    docker.withRegistry('https://index.docker.io/v1/', env.DOCKERHUB_CREDENTIALS_ID) {
                         echo 'Logged in to DockerHub'
                     }
                 }
@@ -80,7 +80,7 @@ pipeline {
             steps {
                 script {
                     def image = docker.image("${DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS_ID) {
+                    docker.withRegistry('https://index.docker.io/v1/', env.DOCKERHUB_CREDENTIALS_ID) {
                         image.push()
                     }
                 }
