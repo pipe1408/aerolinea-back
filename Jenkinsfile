@@ -70,14 +70,20 @@ pipeline {
         }
 
         stage('Build Docker Image') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
-                    def image = docker.build("${DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
+                    def image = docker.build("${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER}")
                 }
             }
         }
 
         stage('Login to DockerHub') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', env.DOCKERHUB_CREDENTIALS_ID) {
@@ -88,6 +94,9 @@ pipeline {
         }
 
         stage('Push Docker Image') {
+            when {
+                branch 'master'
+            }
             steps {
                 script {
                     def image = docker.image("${DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
