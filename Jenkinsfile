@@ -26,7 +26,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                setBuildStatus("Build failed", "FAILURE");
+                setBuildStatus("Build failed", "PENDING");
                 script {
                     try {
                         git branch: BRANCH_NAME, url: REPO_URL
