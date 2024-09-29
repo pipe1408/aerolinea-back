@@ -75,7 +75,7 @@ pipeline {
             }
             steps {
                 script {
-                    def image = docker.build("${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER}")
+                    def image = docker.build("${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}")
                     sh "docker images"
                 }
             }
@@ -108,7 +108,7 @@ pipeline {
             }
             steps {
                 script {
-                    def image = docker.image("${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER}")
+                    def image = docker.image("${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}")
                     docker.withRegistry('https://index.docker.io/v1/', env.DOCKERHUB_CREDENTIALS_ID) {
                         image.push()
                     }
@@ -120,7 +120,7 @@ pipeline {
     post {
         always {
             script {
-                sh "docker rmi ${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER} || true"
+                sh "docker rmi ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER} || true"
             }
         }
         success {
