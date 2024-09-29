@@ -17,8 +17,6 @@ pipeline {
     }
 
     environment {
-        REPO_URL = 'https://github.com/pipe1408/aerolinea-back.git'
-        BRANCH_NAME = 'dev'
         DOCKERHUB_REPO = 'pipeba1408/arquitectura-aeropuerto-back'
         DOCKERHUB_CREDENTIALS_ID = '0445f049-d861-4258-83c4-b06c38944c28'
     }
@@ -73,6 +71,17 @@ pipeline {
             steps {
                 script {
                     def image = docker.build("${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}")
+                    sh "docker images"
+                }
+            }
+        }
+
+        stage ('Trivy verification') {
+            steps {
+                script {
+                    sh """
+                    docker run -u root -v $HOME/Library/Caches:/root/.cache/ -v /var/run/docker.sock:/var/run/docker.sock --name trivy_scan aquasec/trivy image --scanners vuln --severity CRITICAL --exit-code 1 ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER}
+                    """
                 }
             }
         }
@@ -109,6 +118,7 @@ pipeline {
         always {
             script {
                 sh "docker rmi ${DOCKERHUB_REPO}:${GIT_BRANCH}-${env.BUILD_NUMBER} || true"
+                sh 'docker rm -f trivy_scan || true'
             }
         }
         success {
