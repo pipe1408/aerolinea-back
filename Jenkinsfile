@@ -73,7 +73,7 @@ pipeline {
                     sh '''
                     docker run --rm \
                       -v /var/run/docker.sock:/var/run/docker.sock \
-                      -v ${WORKSPACE}:/results \
+                      -v /var/jenkins_home/workspace/aerolinea-back:/results \
                       aquasec/trivy image --quiet --exit-code 1 --format json --output /results/trivy-report.json ${DOCKERHUB_REPO}:${env.BUILD_NUMBER}
                     '''
                 }
