@@ -26,7 +26,7 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-
+                setBuildStatus("Build in progress", "PENDING");
                 script {
                     try {
                         checkout scm
@@ -99,7 +99,7 @@ pipeline {
             }
             steps {
                 script {
-                    def image = docker.image("${DOCKERHUB_REPO}:${env.BUILD_NUMBER}")
+                    def image = docker.image("${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER}")
                     docker.withRegistry('https://index.docker.io/v1/', env.DOCKERHUB_CREDENTIALS_ID) {
                         image.push()
                     }
@@ -111,7 +111,7 @@ pipeline {
     post {
         always {
             script {
-                sh "docker rmi ${DOCKERHUB_REPO}:${env.BUILD_NUMBER} || true"
+                sh "docker rmi ${DOCKERHUB_REPO}:master-${env.BUILD_NUMBER} || true"
             }
         }
         success {
