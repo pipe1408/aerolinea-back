@@ -38,5 +38,11 @@ pipeline {
                 sh './gradlew clean build'
             }
         }
+
+        stage('SonarQube Analysis') {
+            withSonarQubeEnv() {
+              sh "./gradlew sonar"
+            }
+        }
     }
 }
