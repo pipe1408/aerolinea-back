@@ -44,7 +44,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    env.JAVA_HOME = tool name: 'Java 22'
+                    env.JAVA_HOME = tool name: 'JDK22'
                     sh "${env.JAVA_HOME}/bin/java -version"
                 }
                 sh './gradlew clean build'
