@@ -1,4 +1,4 @@
-package com.arquitectura.aerolineaback;
+paackage com.arquitectura.aerolineaback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
