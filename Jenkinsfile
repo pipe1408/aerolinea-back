@@ -12,7 +12,7 @@ pipeline {
     agent any
 
     tools {
-        jdk 'Java 22'
+        jdk 'JDK22'
         dockerTool 'docker'
     }
 
