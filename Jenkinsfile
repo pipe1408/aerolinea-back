@@ -88,7 +88,7 @@ pipeline {
 
         stage('Login to DockerHub') {
             when {
-                branch 'dev'
+                branch 'master'
             }
             steps {
                 script {
@@ -101,7 +101,7 @@ pipeline {
 
         stage('Push Docker Image') {
             when {
-                branch 'dev'
+                branch 'master'
             }
             steps {
                 script {
