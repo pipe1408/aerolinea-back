@@ -1,5 +1,7 @@
-package com.arquitectura.aerolineaback.logica;
+package com.arquitectura.aerolineaback.logica.service;
 
+import com.arquitectura.aerolineaback.logica.EstadoEnum;
+import com.arquitectura.aerolineaback.logica.dto.EstadoDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.logica.dto.VueloDTO;
 import com.arquitectura.aerolineaback.persistencia.jpa.VueloJPA;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class VueloService {
@@ -37,7 +40,9 @@ public class VueloService {
         vueloORM.setOrigen(vueloDTO.origen());
         vueloORM.setDestino(vueloDTO.destino());
         vueloORM.setFecha(vueloDTO.fecha());
+        vueloORM.setHora(vueloDTO.hora());
         vueloORM.setAsientosLibres(vueloDTO.asientosDisponibles());
+        vueloORM.setEstado(EstadoEnum.PROGRAMADO);
         vueloJPA.save(vueloORM);
 
         return new RespuestaDTO(true, "Vuelo creado");
@@ -67,5 +72,29 @@ public class VueloService {
         }
         vueloJPA.delete(optionalVuelo.get());
         return new RespuestaDTO(true, "Vuelo eliminado");
+    }
+
+    public String updateEstado(EstadoDTO estadoDTO) {
+        vueloORM = getVuelo(estadoDTO.flightId()).orElse(null);
+
+        if (vueloORM == null) {
+            return null;
+        }
+
+        EstadoEnum previousState = vueloORM.getEstado();
+
+        vueloORM.setEstado(estadoDTO.state());
+        vueloJPA.save(vueloORM);
+
+        return vueloORM.getFlightId() + ":" + previousState + "->" + estadoDTO.state();
+    }
+
+
+    public List<EstadoDTO> getEstados() {
+        List<VueloORM> vuelos = getVuelos();
+
+        return vuelos.stream()
+                .map(vuelo -> new EstadoDTO(vuelo.getFlightId(), vuelo.getEstado()))
+                .toList();
     }
 }

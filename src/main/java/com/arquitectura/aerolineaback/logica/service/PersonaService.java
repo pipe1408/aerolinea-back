@@ -1,4 +1,4 @@
-package com.arquitectura.aerolineaback.logica;
+package com.arquitectura.aerolineaback.logica.service;
 
 import com.arquitectura.aerolineaback.logica.dto.PersonaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;

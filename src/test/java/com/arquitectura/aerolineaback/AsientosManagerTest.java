@@ -3,7 +3,7 @@ package com.arquitectura.aerolineaback;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import com.arquitectura.aerolineaback.logica.AsientosManager;
+import com.arquitectura.aerolineaback.logica.service.AsientosManager;
 import com.arquitectura.aerolineaback.persistencia.jpa.VueloJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.VueloORM;
 import org.junit.jupiter.api.BeforeEach;

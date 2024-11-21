@@ -2,6 +2,7 @@ package com.arquitectura.aerolineaback.logica;
 
 import com.arquitectura.aerolineaback.logica.dto.PersonaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
+import com.arquitectura.aerolineaback.logica.service.PersonaService;
 import com.arquitectura.aerolineaback.persistencia.jpa.PersonaJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.PersonaORM;
 import org.junit.jupiter.api.BeforeEach;

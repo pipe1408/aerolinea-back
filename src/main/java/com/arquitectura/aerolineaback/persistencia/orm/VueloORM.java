@@ -1,68 +1,49 @@
 package com.arquitectura.aerolineaback.persistencia.orm;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.Getter;
+import lombok.Setter;
+import com.arquitectura.aerolineaback.logica.EstadoEnum;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "VUELOS")
 public class VueloORM {
     @Id
+    @Size(max = 50)
     @Column(name = "FLIGHT_ID", nullable = false, length = 50)
     private String flightId;
 
-    @Column(name = "ORIGEN", length = 50)
-    private String origen;
-
-    @Column(name = "DESTINO", length = 50)
-    private String destino;
-
-    @Column(name = "FECHA")
-    private LocalDate fecha;
-
-    @Column(name = "ASIENTOS_LIBRES")
+    @NotNull
+    @Column(name = "ASIENTOS_LIBRES", nullable = false)
     private Integer asientosLibres;
 
-    public String getFlightId() {
-        return flightId;
-    }
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "DESTINO", nullable = false, length = 50)
+    private String destino;
 
-    public void setFlightId(String flightId) {
-        this.flightId = flightId;
-    }
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ESTADO", nullable = false, length = 50)
+    private EstadoEnum estado;
 
-    public String getOrigen() {
-        return origen;
-    }
+    @NotNull
+    @Column(name = "FECHA", nullable = false)
+    private LocalDate fecha;
 
-    public void setOrigen(String origen) {
-        this.origen = origen;
-    }
+    @NotNull
+    @Column(name = "HORA", nullable = false)
+    private LocalTime hora;
 
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public Integer getAsientosLibres() {
-        return asientosLibres;
-    }
-
-    public void setAsientosLibres(Integer asientosLibres) {
-        this.asientosLibres = asientosLibres;
-    }
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "ORIGEN", nullable = false, length = 50)
+    private String origen;
 }
