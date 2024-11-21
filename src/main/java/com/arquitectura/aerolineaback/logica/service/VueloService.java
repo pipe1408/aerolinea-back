@@ -76,6 +76,11 @@ public class VueloService {
 
     public String updateEstado(EstadoDTO estadoDTO) {
         VueloORM vueloORM = getVuelo(estadoDTO.flightId()).orElse(null);
+
+        if (vueloORM == null) {
+            return null;
+        }
+
         EstadoEnum previousState = vueloORM.getEstado();
 
         vueloORM.setEstado(estadoDTO.state());
@@ -83,6 +88,7 @@ public class VueloService {
 
         return vueloORM.getFlightId() + ":" + previousState + "->" + estadoDTO.state();
     }
+
 
     public List<EstadoDTO> getEstados() {
         List<VueloORM> vuelos = getVuelos();
