@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +33,8 @@ class VueloServiceTest{
 
     @Test
     void DadoNuevoVuelo_CuandoGuardarVuelo_EntoncesVueloGuardado() {
-        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023,10,10), 50);
+        // Adding LocalTime for the flight time (7:20 AM)
+        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023, 10, 10), LocalTime.of(7, 20), 50);
         when(vueloJPA.findById(vueloDTO.vueloId())).thenReturn(Optional.empty());
 
         RespuestaDTO respuesta = vueloService.saveVuelo(vueloDTO);
@@ -43,7 +45,8 @@ class VueloServiceTest{
 
     @Test
     void DadoVueloExistente_CuandoGuardarVuelo_EntoncesErrorVueloDuplicado() {
-        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres",LocalDate.of(2023,10,10), 50);
+        // Adding LocalTime for the flight time (7:20 AM)
+        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023, 10, 10), LocalTime.of(7, 20), 50);
         VueloORM vueloORM = new VueloORM();
         when(vueloJPA.findById(vueloDTO.vueloId())).thenReturn(Optional.of(vueloORM));
 
@@ -56,7 +59,8 @@ class VueloServiceTest{
 
     @Test
     void DadoVueloExistente_CuandoActualizarVuelo_EntoncesVueloActualizado() {
-        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres",LocalDate.of(2023,10,10) , 50);
+        // Adding LocalTime for the flight time (7:20 AM)
+        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023, 10, 10), LocalTime.of(7, 20), 50);
         VueloORM vueloORM = new VueloORM();
         when(vueloJPA.findById(vueloDTO.vueloId())).thenReturn(Optional.of(vueloORM));
 
@@ -68,7 +72,8 @@ class VueloServiceTest{
 
     @Test
     void DadoVueloInexistente_CuandoActualizarVuelo_EntoncesErrorVueloNoExiste() {
-        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2024, 9, 24), 50);
+        // Adding LocalTime for the flight time (7:20 AM)
+        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2024, 9, 24), LocalTime.of(7, 20), 50);
         when(vueloJPA.findById(vueloDTO.vueloId())).thenReturn(Optional.empty());
 
         RespuestaDTO respuesta = vueloService.updateVuelo(vueloDTO);

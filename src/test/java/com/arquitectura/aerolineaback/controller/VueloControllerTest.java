@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +57,8 @@ class VueloControllerTest {
 
     @Test
     void DadoNuevoVuelo_CuandoGuardarVuelo_EntoncesVueloGuardado() {
-        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023,10,10), 50);
+        // Fixing the VueloDTO creation by providing a LocalTime value
+        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023, 10, 10), LocalTime.of(7, 20), 50);
         RespuestaDTO respuesta = new RespuestaDTO(true, "Vuelo creado");
         when(vueloService.saveVuelo(vueloDTO)).thenReturn(respuesta);
 
@@ -68,7 +70,8 @@ class VueloControllerTest {
 
     @Test
     void DadoVueloExistente_CuandoActualizarVuelo_EntoncesVueloActualizado() {
-        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023,10,10), 50);
+        // Fixing the VueloDTO creation by providing a LocalTime value
+        VueloDTO vueloDTO = new VueloDTO("123", "Madrid", "Londres", LocalDate.of(2023, 10, 10), LocalTime.of(7, 20), 50);
         RespuestaDTO respuesta = new RespuestaDTO(true, "Vuelo actualizado");
         when(vueloService.updateVuelo(vueloDTO)).thenReturn(respuesta);
 
