@@ -1,13 +1,11 @@
 package com.arquitectura.aerolineaback.persistencia.orm;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import com.arquitectura.aerolineaback.logica.Estados;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -31,10 +29,10 @@ public class VueloORM {
     @Column(name = "DESTINO", nullable = false, length = 50)
     private String destino;
 
-    @Size(max = 50)
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", nullable = false, length = 50)
-    private String estado;
+    private Estados estado;
 
     @NotNull
     @Column(name = "FECHA", nullable = false)
@@ -48,5 +46,4 @@ public class VueloORM {
     @NotNull
     @Column(name = "ORIGEN", nullable = false, length = 50)
     private String origen;
-
 }
