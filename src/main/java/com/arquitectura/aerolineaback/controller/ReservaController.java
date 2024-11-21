@@ -1,6 +1,6 @@
 package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.logica.ReservaService;
+import com.arquitectura.aerolineaback.logica.service.ReservaService;
 import com.arquitectura.aerolineaback.logica.dto.ReservaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.persistencia.orm.ReservaORM;

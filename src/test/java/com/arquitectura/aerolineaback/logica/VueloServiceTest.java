@@ -2,6 +2,7 @@ package com.arquitectura.aerolineaback.logica;
 
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.logica.dto.VueloDTO;
+import com.arquitectura.aerolineaback.logica.service.VueloService;
 import com.arquitectura.aerolineaback.persistencia.jpa.VueloJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.VueloORM;
 import org.junit.jupiter.api.BeforeEach;
