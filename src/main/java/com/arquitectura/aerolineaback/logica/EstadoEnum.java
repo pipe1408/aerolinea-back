@@ -1,6 +1,6 @@
 package com.arquitectura.aerolineaback.logica;
 
-public enum Estados {
+public enum EstadoEnum {
     PROGRAMADO,
     CONFIRMADO,
     ABORDANDO,

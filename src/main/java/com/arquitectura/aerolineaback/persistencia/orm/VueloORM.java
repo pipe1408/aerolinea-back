@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import com.arquitectura.aerolineaback.logica.Estados;
+import com.arquitectura.aerolineaback.logica.EstadoEnum;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,7 +32,7 @@ public class VueloORM {
     @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "ESTADO", nullable = false, length = 50)
-    private Estados estado;
+    private EstadoEnum estado;
 
     @NotNull
     @Column(name = "FECHA", nullable = false)
