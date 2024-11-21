@@ -75,7 +75,7 @@ public class VueloService {
     }
 
     public String updateEstado(EstadoDTO estadoDTO) {
-        VueloORM vueloORM = getVuelo(estadoDTO.flightId()).orElse(null);
+        vueloORM = getVuelo(estadoDTO.flightId()).orElse(null);
 
         if (vueloORM == null) {
             return null;
@@ -95,6 +95,6 @@ public class VueloService {
 
         return vuelos.stream()
                 .map(vuelo -> new EstadoDTO(vuelo.getFlightId(), vuelo.getEstado()))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
