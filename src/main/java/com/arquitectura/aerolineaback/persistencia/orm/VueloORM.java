@@ -1,6 +1,9 @@
 package com.arquitectura.aerolineaback.persistencia.orm;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -19,26 +22,31 @@ public class VueloORM {
     @Column(name = "FLIGHT_ID", nullable = false, length = 50)
     private String flightId;
 
-    @Column(name = "ASIENTOS_LIBRES")
+    @NotNull
+    @Column(name = "ASIENTOS_LIBRES", nullable = false)
     private Integer asientosLibres;
 
     @Size(max = 50)
-    @Column(name = "DESTINO", length = 50)
+    @NotNull
+    @Column(name = "DESTINO", nullable = false, length = 50)
     private String destino;
 
-    @Column(name = "FECHA")
-    private LocalDate fecha;
-
     @Size(max = 50)
-    @Column(name = "ORIGEN", length = 50)
-    private String origen;
+    @NotNull
+    @Column(name = "ESTADO", nullable = false, length = 50)
+    private String estado;
+
+    @NotNull
+    @Column(name = "FECHA", nullable = false)
+    private LocalDate fecha;
 
     @NotNull
     @Column(name = "HORA", nullable = false)
     private LocalTime hora;
 
-    @Lob
-    @Column(name = "ESTADO")
-    private String estado;
+    @Size(max = 50)
+    @NotNull
+    @Column(name = "ORIGEN", nullable = false, length = 50)
+    private String origen;
 
 }
