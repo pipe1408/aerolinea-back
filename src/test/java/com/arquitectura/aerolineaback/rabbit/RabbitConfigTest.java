@@ -11,7 +11,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
-public class RabbitConfigTest {
+class RabbitConfigTest {
 
     @Autowired
     private ApplicationContext applicationContext;

@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @ExtendWith(MockitoExtension.class)
-public class RabbitProducerTest {
+class RabbitProducerTest {
 
     @Mock
     private RabbitTemplate rabbitTemplate;
