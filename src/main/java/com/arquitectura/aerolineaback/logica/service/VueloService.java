@@ -3,22 +3,25 @@ package com.arquitectura.aerolineaback.logica.service;
 import com.arquitectura.aerolineaback.logica.EstadoEnum;
 import com.arquitectura.aerolineaback.logica.dto.EstadoDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
+import com.arquitectura.aerolineaback.logica.dto.UpdateDTO;
 import com.arquitectura.aerolineaback.logica.dto.VueloDTO;
 import com.arquitectura.aerolineaback.persistencia.jpa.VueloJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.VueloORM;
+import com.arquitectura.aerolineaback.rabbit.RabbitProducer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class VueloService {
     private final VueloJPA vueloJPA;
+    private final RabbitProducer rabbitProducer;
     private VueloORM vueloORM;
 
-    public VueloService(VueloJPA vueloJPA) {
+    public VueloService(VueloJPA vueloJPA, RabbitProducer rabbitProducer) {
         this.vueloJPA = vueloJPA;
+        this.rabbitProducer = rabbitProducer;
     }
 
     public List<VueloORM> getVuelos() {
@@ -55,9 +58,11 @@ public class VueloService {
             return new RespuestaDTO(false, "Vuelo no existe");
         }
         vueloORM = optionalVuelo.get();
+        vueloORM.setFlightId(vueloDTO.vueloId());
         vueloORM.setOrigen(vueloDTO.origen());
         vueloORM.setDestino(vueloDTO.destino());
         vueloORM.setFecha(vueloDTO.fecha());
+        vueloORM.setHora(vueloDTO.hora());
         vueloORM.setAsientosLibres(vueloDTO.asientosDisponibles());
         vueloJPA.save(vueloORM);
 
@@ -85,6 +90,18 @@ public class VueloService {
 
         vueloORM.setEstado(estadoDTO.state());
         vueloJPA.save(vueloORM);
+
+        UpdateDTO update = new UpdateDTO(
+                vueloORM.getFlightId(),
+                vueloORM.getOrigen(),
+                vueloORM.getDestino(),
+                vueloORM.getFecha(),
+                vueloORM.getHora(),
+                previousState,
+                estadoDTO.state()
+        );
+
+        rabbitProducer.sendMessage(update);
 
         return vueloORM.getFlightId() + ":" + previousState + "->" + estadoDTO.state();
     }
