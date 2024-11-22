@@ -2,10 +2,12 @@ package com.arquitectura.aerolineaback.logica;
 
 import com.arquitectura.aerolineaback.logica.dto.EstadoDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
+import com.arquitectura.aerolineaback.logica.dto.UpdateDTO;
 import com.arquitectura.aerolineaback.logica.dto.VueloDTO;
 import com.arquitectura.aerolineaback.logica.service.VueloService;
 import com.arquitectura.aerolineaback.persistencia.jpa.VueloJPA;
 import com.arquitectura.aerolineaback.persistencia.orm.VueloORM;
+import com.arquitectura.aerolineaback.rabbit.RabbitProducer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,6 +26,9 @@ class VueloServiceTest{
 
     @Mock
     private VueloJPA vueloJPA;
+
+    @Mock
+    private RabbitProducer rabbitProducer;
 
     @InjectMocks
     private VueloService vueloService;
@@ -128,6 +133,7 @@ class VueloServiceTest{
         assertEquals(flightId + ":" + previousState + "->" + newState, result);
         assertEquals(newState, vueloORM.getEstado());
         verify(vueloJPA, times(1)).save(vueloORM);
+        verify(rabbitProducer, times(1)).sendMessage(any(UpdateDTO.class));
     }
 
     @Test
