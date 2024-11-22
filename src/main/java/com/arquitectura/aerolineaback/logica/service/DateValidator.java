@@ -1,4 +1,4 @@
-package com.arquitectura.aerolineaback.logica;
+package com.arquitectura.aerolineaback.logica.service;
 
 import com.arquitectura.aerolineaback.persistencia.orm.VueloORM;
 import org.springframework.stereotype.Service;

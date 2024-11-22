@@ -1,6 +1,6 @@
 package com.arquitectura.aerolineaback.controller;
 
-import com.arquitectura.aerolineaback.logica.PersonaService;
+import com.arquitectura.aerolineaback.logica.service.PersonaService;
 import com.arquitectura.aerolineaback.logica.dto.PersonaDTO;
 import com.arquitectura.aerolineaback.logica.dto.RespuestaDTO;
 import com.arquitectura.aerolineaback.persistencia.orm.PersonaORM;

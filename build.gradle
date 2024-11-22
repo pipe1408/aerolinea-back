@@ -3,7 +3,7 @@ plugins {
     id 'org.springframework.boot' version '3.3.3'
     id 'io.spring.dependency-management' version '1.1.6'
     id 'jacoco'
-    id "org.sonarqube" version "5.0.0.4638"
+    id "org.sonarqube" version "5.1.0.4882"
 }
 
 group = 'com.arquitectura'
@@ -15,6 +15,13 @@ java {
     }
 }
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
 repositories {
     mavenCentral()
 }
@@ -23,8 +30,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'com.h2database:h2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
 tasks.named('test') {
